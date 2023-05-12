@@ -1,9 +1,15 @@
 // Event interface
-export default class Event {
+class Event {
     name = "";
     date = "";
-    location = "";
-    price = "";
-    type = "";
+    time = "";
+    description = "";
+    location; // venue name
+    minPrice;
+    maxPrice;
+    currency;
     imgUrl = "";
+    url = ""; // ticketmaster url
 }
+
+module.exports = Event;

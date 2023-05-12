@@ -6,6 +6,9 @@ require("dotenv").config();
 class Server {
     constructor() {
         this.app = express();
+        if (!process.env.PORT) {
+            throw new Error("You forgot to set PORT in your environment");
+        }
         this.port = process.env.PORT;
         this.middlewares();
         this.routes();
@@ -17,7 +20,6 @@ class Server {
 
     // bind controllers to routes
     routes() {
-        // this.app.use(this.paths.login, require("../routes/login"));
         // connect to frontend --> one page
         this.app.use(express.static(path.join(__dirname, "../static")));
         this.app.get("/", (req, res) => {
