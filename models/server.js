@@ -26,7 +26,7 @@ class Server {
             res.sendFile(__dirname + "/index.html");
         });
         // get routes
-        this.app.get("/events", require("../controllers/getEvents").getEvents);
+        this.app.get("/events", require("../controllers/getEvents"));
     }
 
     listen() {

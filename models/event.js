@@ -4,10 +4,10 @@ class Event {
     date = "";
     time = "";
     description = "";
-    location; // venue name
-    minPrice;
-    maxPrice;
-    currency;
+    location = ""; // venue name
+    minPrice = "";
+    maxPrice = "";
+    currency = "";
     imgUrl = "";
     url = ""; // ticketmaster url
 }

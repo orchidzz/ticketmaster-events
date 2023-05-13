@@ -1,12 +1,22 @@
-const axios = require("axios");
-import geocode from "../middleware/geocode";
-import getTicketmasterEvents from "../middleware/ticketmasterEvents";
+const geocode = require("./../middleware/geocode");
+const getTicketmasterEvents = require("./../middleware/ticketmasterEvents");
 
-exports.getEvents = (req, res) => {
-    // res.send([{ name: "name1" }, { name: "name2" }, { name: "name3" }]);
-    // parse req params
+async function getEvents(req, res) {
     // call geocoding api
+    var geoPoint = await geocode(req.query.location);
+    // if location does not exist, return null as response
+    if (geoPoint == null) {
+        res.json(null);
+    }
     // call ticketmaster api
-    // convert all information to event objects
-    // serialize event objects and send back as response
-};
+    var events = await getTicketmasterEvents(
+        geoPoint[0],
+        geoPoint[1],
+        req.query.date,
+        req.query.keywords
+    );
+    // serialize arr of event objects and send back as response
+    res.json(events);
+}
+
+module.exports = getEvents;

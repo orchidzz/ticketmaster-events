@@ -20,6 +20,8 @@ async function geocode(location) {
                 limit: 1,
                 apiKey: process.env.GEOCODE_API_KEY,
             },
+        }).catch(() => {
+            throw new Error("error with geocoding address");
         });
         if (response.data.features.length > 0) {
             var result = response.data.features[0].properties;

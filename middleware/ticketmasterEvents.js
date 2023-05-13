@@ -27,9 +27,11 @@ async function getTicketmasterEvents(latitude, longitude, date, keywords) {
                 keyword: keywords.toString(),
                 geoPoint: geofire.geohashForLocation([latitude, longitude], 9),
                 size: "100",
-                sort: "distance,asc",
+                sort: "distance,date,asc",
                 apikey: process.env.TICKETMASTER_API_KEY,
             },
+        }).catch(() => {
+            throw new Error("Error with getting events from Ticketmaster");
         });
         var result = new Array();
         if (!("_embedded" in response.data)) {
@@ -46,23 +48,26 @@ async function getTicketmasterEvents(latitude, longitude, date, keywords) {
             if ("images" in e) {
                 event.imgUrl = e.images[0].url; // get first image
             }
-            if ("start" in e) {
-                if ("localDate" in e.start) {
-                    event.date = e.start.localDate;
-                }
-                if ("localTime" in e.start) {
-                    event.time = e.start.localTime;
+            if ("dates" in e) {
+                if ("start" in e.dates) {
+                    if ("localDate" in e.dates.start) {
+                        event.date = e.dates.start.localDate;
+                    }
+                    if ("localTime" in e.dates.start) {
+                        event.time = e.dates.start.localTime;
+                    }
                 }
             }
             if ("priceRanges" in e) {
-                if ("currency" in e.priceRanges) {
-                    event.currency = e.priceRanges.currency;
+                // get the first price range
+                if ("currency" in e.priceRanges[0]) {
+                    event.currency = e.priceRanges[0].currency;
                 }
-                if ("min" in e.priceRanges) {
-                    event.minPrice = e.priceRanges.min;
+                if ("min" in e.priceRanges[0]) {
+                    event.minPrice = e.priceRanges[0].min;
                 }
-                if ("max" in e.priceRanges) {
-                    event.maxPrice = e.priceRanges.max;
+                if ("max" in e.priceRanges[0]) {
+                    event.maxPrice = e.priceRanges[0].max;
                 }
             }
             if ("venues" in e._embedded) {
@@ -74,7 +79,7 @@ async function getTicketmasterEvents(latitude, longitude, date, keywords) {
         });
         return result;
     } catch (error) {
-        console.log("Error with getting events from Ticketmaster: ", error);
+        console.log("Error with getting events: ", error);
     }
 }
 
