@@ -37,7 +37,9 @@ async function getTicketmasterEvents(latitude, longitude, date, keywords) {
         if (!("_embedded" in response.data)) {
             return result;
         }
+        console.log(response);
         events = response.data._embedded.events; // arr of events
+        console.log(events);
         events.forEach((e) => {
             // create new Event object using e.properties
             var event = new Event();
@@ -70,8 +72,10 @@ async function getTicketmasterEvents(latitude, longitude, date, keywords) {
                     event.maxPrice = e.priceRanges[0].max;
                 }
             }
-            if ("venues" in e._embedded) {
-                event.location = e._embedded.venues[0].name; // get the first venue
+            if ("_embedded" in e) {
+                if ("venues" in e._embedded) {
+                    event.location = e._embedded.venues[0].name; // get the first venue
+                }
             }
 
             // append to result arr
