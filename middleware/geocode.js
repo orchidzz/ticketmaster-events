@@ -2,7 +2,7 @@ require("dotenv").config();
 const axios = require("axios");
 
 /** Convert location to longitude and latitude
- * @param location string of location/address
+ * @param {string} location
  * @returns array of latitude and longitude
  * */
 async function geocode(location) {

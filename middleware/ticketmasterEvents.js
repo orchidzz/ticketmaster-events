@@ -4,10 +4,10 @@ const geofire = require("geofire-common");
 const Event = require("./../models/event");
 
 /** Query events from ticketmaster api
- * @param longitude float
- * @param latitude float
- * @param date string of string date for events (format: YYYY-MM-DDTHH:mm:ssZ)
- * @param keywords array of string keywords for events
+ * @param {float} longitude
+ * @param {float} latitude
+ * @param {string} date of events (format: YYYY-MM-DDTHH:mm:ssZ)
+ * @param keywords keywords to search for events
  * @returns array of Event objects
  * @note use lon, lat params so do not call geocode() inside this func to make unit testing easier
  * */
