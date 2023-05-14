@@ -83,7 +83,6 @@ function generateCards(next) {
 
     let start = parseInt(sessionStorage.getItem("idx"));
     let events = JSON.parse(sessionStorage.getItem("events"));
-    console.log(start);
     if (next) {
         if (start + 20 < events.length) {
             sessionStorage.setItem("idx", start + 20);
@@ -98,7 +97,6 @@ function generateCards(next) {
     // clear all cards first
     $("#events-container").empty();
     start = parseInt(sessionStorage.getItem("idx"));
-    console.log(start);
 
     // disable next btn on last page
     if (start + 20 >= events.length) {
@@ -117,6 +115,13 @@ function generateCards(next) {
                     $("<img/>")
                         .addClass("card-img-top")
                         .attr("src", events[i].imgUrl)
+                )
+                .append(
+                    $("<a/>")
+                        .addClass(" stretched-link")
+                        .css("height", "0")
+                        .attr("href", events[i].url)
+                        .attr("target", "_blank")
                 )
                 .append(
                     $("<div/>")

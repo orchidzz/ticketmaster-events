@@ -37,9 +37,7 @@ async function getTicketmasterEvents(latitude, longitude, date, keywords) {
         if (!("_embedded" in response.data)) {
             return result;
         }
-        console.log(response);
         events = response.data._embedded.events; // arr of events
-        console.log(events);
         events.forEach((e) => {
             // create new Event object using e.properties
             var event = new Event();
