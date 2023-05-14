@@ -42,19 +42,19 @@
                     <input class="form-control" id="date" type="date" ></input>
                 </div>
                 <div class="mb-3" style="justify-content: center;">
-                    <button id="search-btn" class="btn btn-outline-success" style="width: 5rem; border-color: orange; color: black;">Search</button>                    
+                    <button id="search-btn" class="btn btn-outline-warning" style="width: 5rem; border-color: orange; color: black;">Search</button>                    
                 </div>
                 
             </div>
             <div class="container-fluid">
-                <nav aria-label="Page navigation" id="page-nav">
+                <nav aria-label="Page navigation" id="page-nav" style="display: none;">
                     <ul class="pagination" id="page-buttons">
-                      <li class="page-item">
+                      <li class="page-item" id="prev-item">
                         <a class="page-link" id="prev" aria-label="Previous" style="color: black;">
                           <span aria-hidden="true">&laquo;</span>
                         </a>
                       </li>
-                      <li class="page-item">
+                      <li class="page-item" id="next-item">
                         <a class="page-link" id="next" aria-label="Next"  style="color: black;">
                           <span aria-hidden="true">&raquo;</span>
                         </a>
